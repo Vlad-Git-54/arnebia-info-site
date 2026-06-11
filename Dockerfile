@@ -20,10 +20,12 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV HOST=0.0.0.0
 ENV PORT=3000
+ENV APP_INTERNAL_PORT=3001
 ENV VINEXT_TRUST_PROXY=1
 
 COPY --from=builder /app/dist/standalone ./
+COPY --from=builder /app/timeweb-server.js ./timeweb-server.js
 
 EXPOSE 3000
 
-CMD ["node", "server.js"]
+CMD ["node", "timeweb-server.js"]
