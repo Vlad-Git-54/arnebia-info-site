@@ -25,7 +25,7 @@ npm run build
 
 ## Деплой в Timeweb Cloud App Platform
 
-В корне проекта есть `Dockerfile`. В Timeweb App Platform выбирайте Docker/Dockerfile, порт `3000`.
+В корне проекта есть `Dockerfile`. В Timeweb App Platform выбирайте Docker/Dockerfile. Контейнер запускает standalone-сервер на порту `3000`.
 
 Основные переменные:
 
