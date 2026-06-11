@@ -28,6 +28,6 @@ COPY --from=builder /app/timeweb-server.js ./timeweb-server.js
 
 EXPOSE 3000
 
-HEALTHCHECK --interval=10s --timeout=3s --start-period=5s --retries=3 CMD node -e "process.exit(0)"
+HEALTHCHECK --interval=2s --timeout=1s --start-period=1s --retries=1 CMD node -e "process.exit(0)"
 
 CMD ["node", "timeweb-server.js"]

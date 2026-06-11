@@ -11,6 +11,17 @@ const rootDir = dirname(fileURLToPath(import.meta.url));
 let applicationReady = false;
 let loggedRequests = 0;
 
+function sendHealthOk(request, response) {
+  response.shouldKeepAlive = false;
+  response.writeHead(200, {
+    "cache-control": "no-store",
+    connection: "close",
+    "content-length": "2",
+    "content-type": "text/plain; charset=utf-8",
+  });
+  response.end(request.method === "HEAD" ? undefined : "ok");
+}
+
 const child = spawn(process.execPath, [join(rootDir, "server.js")], {
   cwd: rootDir,
   env: {
@@ -70,21 +81,13 @@ const server = http.createServer((request, response) => {
     );
   }
 
-  if (request.url === "/health" || request.url === "/health/") {
-    response.writeHead(200, { "content-type": "text/plain; charset=utf-8" });
-    response.end("ok");
-    return;
-  }
-
-  if (!applicationReady && (request.url === "/" || request.url === "")) {
-    response.writeHead(200, { "content-type": "text/plain; charset=utf-8" });
-    response.end("ok");
-    return;
-  }
-
-  if (request.method === "HEAD") {
-    response.writeHead(200, { "content-type": "text/plain; charset=utf-8" });
-    response.end();
+  if (
+    request.method === "HEAD" ||
+    request.url === "/health" ||
+    request.url === "/health/" ||
+    (!applicationReady && (request.url === "/" || request.url === ""))
+  ) {
+    sendHealthOk(request, response);
     return;
   }
 
