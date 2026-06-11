@@ -8,6 +8,7 @@ const publicHost = process.env.HOST ?? "0.0.0.0";
 const internalPort = Number.parseInt(process.env.APP_INTERNAL_PORT ?? "3001", 10);
 const internalHost = "127.0.0.1";
 const rootDir = dirname(fileURLToPath(import.meta.url));
+let applicationReady = false;
 let loggedRequests = 0;
 
 const child = spawn(process.execPath, [join(rootDir, "server.js")], {
@@ -29,6 +30,36 @@ child.on("exit", (code, signal) => {
   process.exit(code ?? 1);
 });
 
+function markApplicationReady() {
+  if (!applicationReady) {
+    applicationReady = true;
+    console.log("[timeweb] application server is ready");
+  }
+}
+
+const readinessCheck = setInterval(() => {
+  const readinessRequest = http.request(
+    {
+      hostname: internalHost,
+      method: "GET",
+      path: "/health",
+      port: internalPort,
+      timeout: 2000,
+    },
+    (readinessResponse) => {
+      if ((readinessResponse.statusCode ?? 500) < 500) {
+        clearInterval(readinessCheck);
+        markApplicationReady();
+      }
+      readinessResponse.resume();
+    },
+  );
+
+  readinessRequest.on("error", () => {});
+  readinessRequest.on("timeout", () => readinessRequest.destroy());
+  readinessRequest.end();
+}, 500);
+
 const server = http.createServer((request, response) => {
   if (loggedRequests < 30) {
     loggedRequests += 1;
@@ -40,6 +71,12 @@ const server = http.createServer((request, response) => {
   }
 
   if (request.url === "/health" || request.url === "/health/") {
+    response.writeHead(200, { "content-type": "text/plain; charset=utf-8" });
+    response.end("ok");
+    return;
+  }
+
+  if (!applicationReady && (request.url === "/" || request.url === "")) {
     response.writeHead(200, { "content-type": "text/plain; charset=utf-8" });
     response.end("ok");
     return;
@@ -60,6 +97,9 @@ const server = http.createServer((request, response) => {
       port: internalPort,
     },
     (upstreamResponse) => {
+      if ((upstreamResponse.statusCode ?? 500) < 500) {
+        markApplicationReady();
+      }
       response.writeHead(upstreamResponse.statusCode ?? 502, upstreamResponse.headers);
       upstreamResponse.pipe(response);
     },
