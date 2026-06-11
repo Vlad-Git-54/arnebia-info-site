@@ -23,6 +23,19 @@ npm run dev
 npm run build
 ```
 
+## Деплой в Timeweb Cloud App Platform
+
+В корне проекта есть `Dockerfile`. В Timeweb App Platform выбирайте Docker/Dockerfile, порт `3000`.
+
+Основные переменные:
+
+```bash
+NODE_ENV=production
+HOST=0.0.0.0
+PORT=3000
+NEXT_PUBLIC_SITE_URL=https://ваш-временный-домен
+```
+
 ## Структура
 
 ```text
@@ -99,4 +112,3 @@ Telegram, WhatsApp, email, телефон и адрес находятся в `c
 - новые товары и новости добавляются без изменения страниц;
 - мультиязычность можно добавить через сегменты маршрутов `app/[locale]/`;
 - для настоящей CMS можно заменить `lib/content.ts`, оставив компоненты и страницы.
-
