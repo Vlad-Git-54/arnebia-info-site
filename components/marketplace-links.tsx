@@ -21,7 +21,7 @@ export function MarketplaceLinks({
     return (
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-olive-800">
-          Купить на маркетплейсах
+          Где купить
         </p>
         <div className="mt-3 grid gap-2">
           {visibleLinks.map(({ key, label }) => (
@@ -44,7 +44,7 @@ export function MarketplaceLinks({
   return (
     <div className="rounded-md border border-olive-200 bg-olive-50 p-4">
       <p className="text-xs font-semibold uppercase tracking-[0.18em] text-olive-800">
-        Купить на маркетплейсах
+        Где купить
       </p>
       <div className="mt-4 flex flex-wrap gap-3">
         {visibleLinks.map(({ key, label }) => (

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Icon } from "@/components/icons";
 import { siteConfig } from "@/content/site";
 import { brands, categories } from "@/content/taxonomy";
@@ -8,19 +9,11 @@ export function Footer() {
     <footer className="border-t border-stone-200 bg-stone-950 text-white">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.2fr_1fr_1fr_1fr] lg:px-8">
         <div>
-          <Link className="flex items-center gap-3" href="/" aria-label="Арнебия, главная">
-            <span className="grid h-11 w-11 place-items-center rounded-md bg-olive-500 text-stone-950">
-              <Icon className="h-5 w-5" name="leaf" />
-            </span>
-            <span>
-              <span className="block text-lg font-semibold leading-none">Арнебия</span>
-              <span className="mt-1 block text-[11px] font-medium uppercase tracking-[0.16em] text-stone-400">
-                алгоритмы красоты и здоровья
-              </span>
-            </span>
+          <Link className="inline-flex rounded-md bg-white px-3 py-2" href="/" aria-label="Арнебия, главная">
+            <Image alt="Арнебия" height={85} src="/brand/arnebia-logo.svg" unoptimized width={220} />
           </Link>
           <p className="mt-5 max-w-sm text-sm leading-7 text-stone-300">
-            Информационный сайт производителя и дистрибьютора натуральной косметики, эфирных масел, БАДов и витаминов.
+            Натуральная косметика, эфирные масла, БАДы и витамины для осознанного ухода за собой и своей семьей.
           </p>
           <div className="mt-5 flex gap-2">
             <a className="footer-social" href={siteConfig.telegramUrl} rel="noreferrer" target="_blank">
@@ -43,7 +36,7 @@ export function Footer() {
               ["/news", "Новости и блог"],
               ["/seminars", "Семинары"],
               ["/promotions", "Акции"],
-              ["/certificates", "Сертификаты"],
+              ["/certificates", "Справочники"],
               ["/sitemap", "Карта сайта"],
             ].map(([href, label]) => (
               <Link href={href} key={href}>
@@ -76,9 +69,8 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-white/10 px-4 py-5 text-center text-xs text-stone-400">
-        © 2026 ООО «Арнебия». Информационный сайт без корзины, цен и онлайн-оформления заказа.
+        © 2026 ООО «Арнебия». Алгоритмы красоты и здоровья.
       </div>
     </footer>
   );
 }
-

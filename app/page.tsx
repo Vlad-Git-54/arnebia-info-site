@@ -5,15 +5,15 @@ import { Icon } from "@/components/icons";
 import { PostCard } from "@/components/post-card";
 import { ProductCard } from "@/components/product-card";
 import { SectionHeading } from "@/components/section-heading";
-import { companyFacts } from "@/content/site";
+import { companyFacts, homeBanners } from "@/content/site";
 import { brands } from "@/content/taxonomy";
 import { posts, products } from "@/lib/content";
 
 const heroProductSlugs = [
-  "villaphyta-lavender-hydrolat",
+  "arnebia-skinstaff",
+  "villaphyta-feet-deo-spray",
+  "villaphyta-bifidobalance",
   "atlantomarin-comfort-rinse",
-  "arnebia-selection-day-cream",
-  "sanatur-biospirulina",
 ];
 
 const heroProducts = heroProductSlugs
@@ -27,7 +27,7 @@ const advantages = [
   "30+ лет экспертной работы с натуральной косметикой, витаминами и БАДами",
   "Собственные бренды и европейские партнеры с сильной отраслевой экспертизой",
   "Образовательные семинары, справочники и консультационная поддержка партнеров",
-  "Отдельные SEO-страницы для брендов, категорий, товаров и материалов блога",
+  "Каталог, справочники и материалы для уверенного выбора продуктов",
 ];
 
 export default function Home() {
@@ -47,7 +47,7 @@ export default function Home() {
               Натуральная косметика, витамины, БАДы и эфирные масла.
             </p>
             <p className="mt-5 max-w-2xl text-pretty text-base leading-8 text-stone-650 md:text-lg">
-              ООО «Арнебия» производит и дистрибьютирует натуральную косметику, эфирные масла, БАДы и витамины. Новый сайт помогает изучить бренды, составы и экспертные материалы без корзины, цен и онлайн-заказа.
+              ООО «Арнебия» производит и дистрибьютирует натуральную косметику, эфирные масла, БАДы и витамины. В каталоге собраны бренды, составы, рекомендации и экспертные материалы для осознанного выбора.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link className="primary-link" href="/catalog">
@@ -95,6 +95,37 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="bg-white py-10">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+            {homeBanners.map((banner, index) => (
+              <Link
+                className={
+                  index === 0
+                    ? "group relative min-h-[220px] overflow-hidden rounded-md border border-stone-200 bg-linen-100 shadow-sm md:col-span-2 xl:col-span-2"
+                    : "group relative min-h-[220px] overflow-hidden rounded-md border border-stone-200 bg-linen-100 shadow-sm"
+                }
+                href={banner.href}
+                key={banner.title}
+              >
+                <Image
+                  alt={banner.title}
+                  className="object-cover transition duration-500 group-hover:scale-105"
+                  fill
+                  sizes={index === 0 ? "(max-width: 1280px) 100vw, 470px" : "(max-width: 768px) 100vw, 230px"}
+                  src={banner.image}
+                  unoptimized
+                />
+                <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-stone-950/82 to-transparent p-5 pt-16 text-white">
+                  <span className="block text-lg font-semibold leading-tight">{banner.title}</span>
+                  <span className="mt-2 block text-sm leading-6 text-white/82">{banner.description}</span>
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="border-y border-stone-200 bg-white py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
@@ -119,7 +150,7 @@ export default function Home() {
       <section className="py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            description="Карточки показывают состав, назначение и ссылки на маркетплейсы. Сайт намеренно не содержит корзину, цены и оформление заказа."
+            description="Новинки и востребованные позиции из направлений ухода, витаминов, БАДов, ароматерапии и натуральной косметики."
             eyebrow="Каталог"
             title="Популярные и новые продукты"
           />
@@ -158,7 +189,7 @@ export default function Home() {
             <SectionHeading
               description="Новости, образовательные события, акции и экспертные материалы для покупателей и партнеров."
               eyebrow="Новости и блог"
-              title="Материалы для доверия и SEO-продвижения"
+              title="Материалы Арнебии"
             />
             <Link className="secondary-link self-start md:self-end" href="/news">
               <span>Все материалы</span>

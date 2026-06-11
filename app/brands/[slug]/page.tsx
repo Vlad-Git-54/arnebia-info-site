@@ -113,8 +113,8 @@ export default async function BrandPage({ params }: { params: Params }) {
         <SectionHeading
           description={
             brandProducts.length
-              ? "Каждая карточка содержит фото, назначение, ингредиенты и ссылки на маркетплейсы."
-              : "Для бренда уже подготовлена посадочная страница. Товары можно добавить через content/products."
+              ? "Фото, назначение, ключевые ингредиенты и быстрый переход к карточкам товаров."
+              : "Ассортимент бренда обновляется."
           }
           eyebrow="Продукты"
           title={`Каталог ${brand.title}`}
@@ -127,7 +127,7 @@ export default async function BrandPage({ params }: { params: Params }) {
           </div>
         ) : (
           <div className="mt-8 rounded-md border border-stone-200 bg-white p-8 text-stone-650">
-            В этом разделе скоро появятся продукты бренда.
+            Ассортимент бренда обновляется.
           </div>
         )}
       </section>

@@ -10,7 +10,7 @@ type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 export const metadata: Metadata = {
   title: "Каталог продукции",
   description:
-    "Информационный каталог Арнебии по брендам и категориям: косметика, БАДы, витамины, эфирные масла и уход за полостью рта.",
+    "Каталог продукции Арнебии по брендам и категориям: косметика, БАДы, витамины, эфирные масла и уход за полостью рта.",
 };
 
 function firstParam(value: string | string[] | undefined) {
@@ -37,7 +37,7 @@ export default async function CatalogPage({
   return (
     <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <SectionHeading
-        description="Фильтруйте продукты по брендам и категориям, изучайте составы и переходите на Wildberries или Ozon из карточек товаров."
+        description="Фильтруйте продукты по брендам и категориям, изучайте составы и выбирайте удобный маркетплейс в карточках товаров."
         eyebrow="Каталог"
         title={brand ? `Продукция ${brand.title}` : "Продукция Арнебии"}
       />
@@ -50,7 +50,7 @@ export default async function CatalogPage({
               Найдено: {filtered.length} из {products.length}
             </p>
             <p className="text-sm text-stone-650">
-              Бренды: {brands.length} · Каталог без цен и корзины
+              Бренды: {brands.length} · Категории и подборки обновляются
             </p>
           </div>
           {filtered.length ? (

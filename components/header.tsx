@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Icon } from "@/components/icons";
 import { siteConfig } from "@/content/site";
 
@@ -27,16 +28,16 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-stone-200/80 bg-white/90 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
-        <Link className="flex items-center gap-3" href="/" aria-label="Арнебия, главная">
-          <span className="grid h-11 w-11 place-items-center rounded-md bg-olive-900 text-white">
-            <Icon className="h-5 w-5" name="leaf" />
-          </span>
-          <span>
-            <span className="block text-lg font-semibold leading-none text-stone-950">Арнебия</span>
-            <span className="mt-1 block text-[11px] font-medium uppercase tracking-[0.16em] text-stone-500">
-              natural care
-            </span>
-          </span>
+        <Link className="flex min-w-0 items-center" href="/" aria-label="Арнебия, главная">
+          <Image
+            alt="Арнебия"
+            className="h-auto w-[148px] sm:w-[184px]"
+            height={85}
+            priority
+            src="/brand/arnebia-logo.svg"
+            unoptimized
+            width={330}
+          />
         </Link>
 
         <NavLinks className="hidden items-center gap-1 lg:flex" />

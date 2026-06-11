@@ -61,6 +61,26 @@ export const categories: Category[] = [
     title: "Аксессуары",
     description: "Бьюти-аксессуары, щетки, массажные и уходовые принадлежности.",
   },
+  {
+    slug: "feet-care",
+    title: "Для ног",
+    description: "Кремы, спреи и восстанавливающий уход для стоп и ногтей.",
+  },
+  {
+    slug: "deodorants",
+    title: "Дезодоранты",
+    description: "Современные формулы ежедневной свежести без лишней агрессии к коже.",
+  },
+  {
+    slug: "sets",
+    title: "Наборы",
+    description: "Подарочные и сезонные комплекты для ухода, ароматерапии и макияжа.",
+  },
+  {
+    slug: "books",
+    title: "Книги и справочники",
+    description: "Печатные и электронные материалы Арнебии для покупателей и специалистов.",
+  },
 ];
 
 export const brands: Brand[] = [
@@ -88,6 +108,19 @@ export const brands: Brand[] = [
     focus: ["Дерматокосметика", "Уход за лицом", "Уход за руками", "Уход за стопами"],
     image: "https://www.arnebia.ru/img/shop/4333b.jpg",
     accent: "#8f795d",
+    featured: true,
+  },
+  {
+    slug: "arnebia-vitamins",
+    title: "Витамины Арнебия",
+    latin: "Arnebia Vitamins",
+    short: "Шипучие витаминно-минеральные комплексы для ежедневной поддержки организма.",
+    description:
+      "Линейка витаминов и минералов Арнебия в удобном формате шипучих таблеток: витамин C, цинк, селен, кальций, магний и мультивитаминные комплексы.",
+    origin: "Германия",
+    focus: ["Витамины", "Минералы", "Ежедневная поддержка"],
+    image: "https://www.arnebia.ru/img/shop/1317f.jpg",
+    accent: "#9a7f3f",
     featured: true,
   },
   {
@@ -196,4 +229,3 @@ export function getBrand(slug: string) {
 export function getCategory(slug: string) {
   return categories.find((category) => category.slug === slug);
 }
-

@@ -17,7 +17,7 @@ const staticLinks: Array<[string, string]> = [
   ["/news", "Новости"],
   ["/seminars", "Семинары"],
   ["/promotions", "Акции"],
-  ["/certificates", "Сертификаты"],
+  ["/certificates", "Справочники"],
   ["/contacts", "Контакты"],
 ];
 
