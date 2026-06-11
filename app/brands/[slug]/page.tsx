@@ -1,0 +1,136 @@
+import Image from "next/image";
+import Link from "next/link";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { JsonLd } from "@/components/json-ld";
+import { ProductCard } from "@/components/product-card";
+import { SectionHeading } from "@/components/section-heading";
+import { brands, getBrand } from "@/content/taxonomy";
+import { getProductsByBrand } from "@/lib/content";
+import { breadcrumbJsonLd } from "@/lib/seo";
+
+type Params = Promise<{ slug: string }>;
+
+export function generateStaticParams() {
+  return brands.map((brand) => ({ slug: brand.slug }));
+}
+
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { slug } = await params;
+  const brand = getBrand(slug);
+
+  if (!brand) return {};
+
+  return {
+    title: brand.title,
+    description: brand.description,
+    openGraph: {
+      title: `${brand.title} — Арнебия`,
+      description: brand.description,
+      images: [{ url: brand.image, alt: `Продукция бренда ${brand.title}` }],
+    },
+  };
+}
+
+export default async function BrandPage({ params }: { params: Params }) {
+  const { slug } = await params;
+  const brand = getBrand(slug);
+
+  if (!brand) notFound();
+
+  const brandProducts = getProductsByBrand(brand.slug);
+
+  return (
+    <main>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Главная", url: "/" },
+          { name: "Бренды", url: "/brands" },
+          { name: brand.title, url: `/brands/${brand.slug}` },
+        ])}
+      />
+      <section className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[0.95fr_1.05fr] lg:px-8">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-clay-700">
+            {brand.origin}
+          </p>
+          <h1 className="mt-3 text-balance text-5xl font-semibold leading-tight text-stone-950 md:text-7xl">
+            {brand.title}
+          </h1>
+          {brand.latin ? (
+            <p className="mt-3 text-xl font-medium text-olive-800">{brand.latin}</p>
+          ) : null}
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-stone-650">
+            {brand.description}
+          </p>
+          <div className="mt-7 flex flex-wrap gap-2">
+            {brand.focus.map((item) => (
+              <span className="rounded-md bg-linen-100 px-3 py-1.5 text-sm font-semibold text-stone-700" key={item}>
+                {item}
+              </span>
+            ))}
+          </div>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link className="primary-link" href={`/catalog?brand=${brand.slug}`}>
+              Продукты бренда
+            </Link>
+            <Link className="secondary-link" href="/contacts">
+              Связаться с отделом продаж
+            </Link>
+          </div>
+        </div>
+        <div className="relative aspect-[4/3] overflow-hidden rounded-md border border-stone-200 bg-white shadow-sm">
+          <Image
+            alt={`Продукция бренда ${brand.title}`}
+            className="object-contain p-10"
+            fill
+            priority
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            src={brand.image}
+            unoptimized
+          />
+        </div>
+      </section>
+
+      <section className="border-y border-stone-200 bg-white py-14">
+        <div className="mx-auto grid max-w-7xl gap-5 px-4 sm:px-6 md:grid-cols-3 lg:px-8">
+          <div className="rounded-md bg-linen-100 p-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-clay-700">Фокус</p>
+            <h2 className="mt-2 text-2xl font-semibold text-stone-950">{brand.focus[0]}</h2>
+          </div>
+          <div className="rounded-md bg-linen-100 p-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-clay-700">Происхождение</p>
+            <h2 className="mt-2 text-2xl font-semibold text-stone-950">{brand.origin}</h2>
+          </div>
+          <div className="rounded-md bg-linen-100 p-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-clay-700">Карточек</p>
+            <h2 className="mt-2 text-2xl font-semibold text-stone-950">{brandProducts.length}</h2>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+        <SectionHeading
+          description={
+            brandProducts.length
+              ? "Каждая карточка содержит фото, назначение, ингредиенты и ссылки на маркетплейсы."
+              : "Для бренда уже подготовлена посадочная страница. Товары можно добавить через content/products."
+          }
+          eyebrow="Продукты"
+          title={`Каталог ${brand.title}`}
+        />
+        {brandProducts.length ? (
+          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {brandProducts.map((product) => (
+              <ProductCard product={product} key={product.slug} />
+            ))}
+          </div>
+        ) : (
+          <div className="mt-8 rounded-md border border-stone-200 bg-white p-8 text-stone-650">
+            В этом разделе скоро появятся продукты бренда.
+          </div>
+        )}
+      </section>
+    </main>
+  );
+}
