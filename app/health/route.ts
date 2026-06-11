@@ -1,4 +1,4 @@
-export function GET() {
+function healthResponse() {
   return new Response("ok", {
     headers: {
       "content-type": "text/plain; charset=utf-8",
@@ -7,3 +7,10 @@ export function GET() {
   });
 }
 
+export function GET() {
+  return healthResponse();
+}
+
+export function HEAD() {
+  return healthResponse();
+}
