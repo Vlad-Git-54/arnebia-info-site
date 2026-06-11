@@ -8,6 +8,7 @@ const publicHost = process.env.HOST ?? "0.0.0.0";
 const internalPort = Number.parseInt(process.env.APP_INTERNAL_PORT ?? "3001", 10);
 const internalHost = "127.0.0.1";
 const rootDir = dirname(fileURLToPath(import.meta.url));
+let loggedRequests = 0;
 
 const child = spawn(process.execPath, [join(rootDir, "server.js")], {
   cwd: rootDir,
@@ -29,6 +30,15 @@ child.on("exit", (code, signal) => {
 });
 
 const server = http.createServer((request, response) => {
+  if (loggedRequests < 30) {
+    loggedRequests += 1;
+    console.log(
+      `[timeweb] request ${request.method ?? "GET"} ${request.url ?? "/"} host=${
+        request.headers.host ?? "-"
+      } ua=${request.headers["user-agent"] ?? "-"}`,
+    );
+  }
+
   if (request.url === "/health" || request.url === "/health/") {
     response.writeHead(200, { "content-type": "text/plain; charset=utf-8" });
     response.end("ok");
