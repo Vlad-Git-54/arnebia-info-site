@@ -1,6 +1,7 @@
 export type MarketplaceLinks = {
   wildberries?: string;
   ozon?: string;
+  apteka?: string;
   official?: string;
 };
 

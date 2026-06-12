@@ -194,6 +194,7 @@ function makeProduct(): Product {
     marketplaces: {
       wildberries: "",
       ozon: "",
+      apteka: "",
       official: "",
     },
     seoTitle: "",
@@ -1822,6 +1823,7 @@ function SeoEditor({
     (product) =>
       !product.marketplaces.wildberries?.trim() &&
       !product.marketplaces.ozon?.trim() &&
+      !product.marketplaces.apteka?.trim() &&
       !product.marketplaces.official?.trim(),
   );
   const auditItems = [
@@ -2681,7 +2683,7 @@ function ProductsEditor({
                     />
                   </label>
                 </div>
-                <div className="grid gap-4 sm:grid-cols-3">
+                <div className="grid gap-4 sm:grid-cols-4">
                   <label className="form-field">
                     <span>Wildberries</span>
                     <input
@@ -2708,6 +2710,20 @@ function ProductsEditor({
                         })
                       }
                       value={selectedProduct.marketplaces.ozon ?? ""}
+                    />
+                  </label>
+                  <label className="form-field">
+                    <span>Apteka.ru</span>
+                    <input
+                      onChange={(event) =>
+                        updateProduct(selectedProduct.slug, {
+                          marketplaces: {
+                            ...selectedProduct.marketplaces,
+                            apteka: event.target.value,
+                          },
+                        })
+                      }
+                      value={selectedProduct.marketplaces.apteka ?? ""}
                     />
                   </label>
                   <label className="form-field">
