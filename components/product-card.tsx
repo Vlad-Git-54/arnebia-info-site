@@ -1,25 +1,29 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MarketplaceLinks } from "@/components/marketplace-links";
-import { getBrand } from "@/content/taxonomy";
 import type { Product } from "@/types/content";
 
-export function ProductCard({ product }: { product: Product }) {
-  const brand = getBrand(product.brand);
-
+export function ProductCard({
+  brandTitle,
+  product,
+}: {
+  brandTitle?: string;
+  product: Product;
+}) {
   return (
     <article className="group grid overflow-hidden rounded-md border border-stone-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
       <Link
         aria-label={product.title}
-        className="relative block aspect-[4/3] overflow-hidden bg-linen-100"
+        className="relative block aspect-square overflow-hidden bg-gradient-to-br from-white to-linen-100"
         href={`/catalog/${product.slug}`}
       >
         <Image
           alt={product.imageAlt}
-          className="object-contain p-8 transition duration-500 group-hover:scale-105"
+          className="h-full w-full object-contain transition duration-500 group-hover:scale-[1.04]"
           fill
           sizes="(max-width: 768px) 100vw, 33vw"
           src={product.image}
+          style={{ objectFit: "contain" }}
           unoptimized
         />
         {product.badge ? (
@@ -31,7 +35,7 @@ export function ProductCard({ product }: { product: Product }) {
       <div className="grid gap-4 p-5">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-clay-700">
-            {brand?.title ?? product.brand}
+            {brandTitle ?? product.brand}
           </p>
           <h3 className="mt-2 text-lg font-semibold leading-snug text-stone-950">
             <Link className="hover:text-olive-800" href={`/catalog/${product.slug}`}>
@@ -57,4 +61,3 @@ export function ProductCard({ product }: { product: Product }) {
     </article>
   );
 }
-

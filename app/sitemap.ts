@@ -1,22 +1,25 @@
 import type { MetadataRoute } from "next";
-import { brands, categories } from "@/content/taxonomy";
-import { posts, products } from "@/lib/content";
+import { readBrands, readCategories } from "@/lib/admin-config";
+import { getPosts, getProducts } from "@/lib/content";
 import { absoluteUrl } from "@/lib/utils";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes = [
     "",
     "/catalog",
     "/brands",
     "/about",
     "/news",
-    "/seminars",
     "/promotions",
     "/certificates",
     "/contacts",
     "/sitemap",
   ];
 
+  const products = await getProducts();
+  const posts = await getPosts();
+  const brands = await readBrands();
+  const categories = await readCategories();
   const productRoutes = products.map((product) => `/catalog/${product.slug}`);
   const brandRoutes = brands.map((brand) => `/brands/${brand.slug}`);
   const categoryRoutes = categories.map((category) => `/catalog/category/${category.slug}`);

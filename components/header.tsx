@@ -8,7 +8,7 @@ const navItems = [
   { href: "/brands", label: "Бренды" },
   { href: "/about", label: "О компании" },
   { href: "/news", label: "Новости" },
-  { href: "/seminars", label: "Семинары" },
+  { href: "/certificates", label: "Справочники" },
   { href: "/contacts", label: "Контакты" },
 ];
 

@@ -4,10 +4,22 @@ import type { Product } from "@/types/content";
 import { absoluteUrl } from "@/lib/utils";
 
 export const defaultSeo = {
-  title: "Арнебия — натуральная косметика, БАДы, витамины и эфирные масла",
+  title: "Арнебия — натуральная косметика, витамины, БАДы и эфирные масла",
   description:
-    "ООО «Арнебия»: натуральная косметика, эфирные масла, БАДы, витамины, бренды, новости, семинары и контакты.",
+    "ООО «Арнебия»: натуральная косметика, эфирные масла, витамины, БАДы, бренды, новости, справочники и контакты.",
 };
+
+export function applySeoTemplate(
+  template: string | undefined,
+  values: Record<"brand" | "category" | "title", string>,
+) {
+  if (!template?.trim()) return values.title;
+
+  return template
+    .replaceAll("{brand}", values.brand)
+    .replaceAll("{category}", values.category)
+    .replaceAll("{title}", values.title);
+}
 
 export function organizationJsonLd() {
   return {

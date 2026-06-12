@@ -1,15 +1,19 @@
 import Link from "next/link";
 import { Icon } from "@/components/icons";
-import { brands, categories } from "@/content/taxonomy";
 import { cn } from "@/lib/utils";
+import type { Brand, Category } from "@/types/content";
 
 export function CatalogFilters({
   activeBrand,
   activeCategory,
+  brands,
+  categories,
   query,
 }: {
   activeBrand?: string;
   activeCategory?: string;
+  brands: Brand[];
+  categories: Category[];
   query?: string;
 }) {
   return (
@@ -74,4 +78,3 @@ export function CatalogFilters({
     </aside>
   );
 }
-

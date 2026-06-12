@@ -1,8 +1,10 @@
 import Script from "next/script";
+import { readSeoSettings } from "@/lib/admin-config";
 
-export function Analytics() {
-  const ymId = process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID;
-  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+export async function Analytics() {
+  const seo = await readSeoSettings();
+  const ymId = seo.yandexMetrikaId || process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID;
+  const gaId = seo.googleAnalyticsId || process.env.NEXT_PUBLIC_GA_ID;
 
   return (
     <>
@@ -47,4 +49,3 @@ export function Analytics() {
     </>
   );
 }
-

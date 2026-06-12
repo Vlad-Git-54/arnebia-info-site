@@ -11,7 +11,6 @@ export function formatDate(date: string) {
 }
 
 export function absoluteUrl(path = "") {
-  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://www.arnebia.ru";
+  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://arnebia-info.ru";
   return new URL(path, base).toString();
 }
-

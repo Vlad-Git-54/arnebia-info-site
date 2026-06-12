@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
 import { PostCard } from "@/components/post-card";
 import { SectionHeading } from "@/components/section-heading";
-import { posts } from "@/lib/content";
+import { getPosts } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Акции",
   description: "Акции и маркетинговые материалы Арнебии.",
 };
 
-export default function PromotionsPage() {
+export const dynamic = "force-dynamic";
+
+export default async function PromotionsPage() {
+  const posts = await getPosts();
   const promos = posts.filter((post) => post.category === "promo");
 
   return (
@@ -26,4 +29,3 @@ export default function PromotionsPage() {
     </main>
   );
 }
-

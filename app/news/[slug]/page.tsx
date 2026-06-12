@@ -9,11 +9,12 @@ import { formatDate } from "@/lib/utils";
 
 type Params = Promise<{ slug: string }>;
 
+export const dynamic = "force-dynamic";
+
 const labels = {
   article: "Статья",
   news: "Новость",
   promo: "Акция",
-  seminar: "Семинар",
 };
 
 export function generateStaticParams() {
@@ -22,7 +23,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = await getPost(slug);
 
   if (!post) return {};
 
@@ -40,7 +41,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 
 export default async function NewsDetailPage({ params }: { params: Params }) {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = await getPost(slug);
 
   if (!post) notFound();
 
@@ -64,11 +65,12 @@ export default async function NewsDetailPage({ params }: { params: Params }) {
         <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-md border border-stone-200 bg-white">
           <Image
             alt={post.imageAlt}
-            className="object-contain p-8"
+            className="h-full w-full object-contain"
             fill
             priority
             sizes="(max-width: 1024px) 100vw, 800px"
             src={post.image}
+            style={{ objectFit: "contain" }}
             unoptimized
           />
         </div>
@@ -77,4 +79,3 @@ export default async function NewsDetailPage({ params }: { params: Params }) {
     </main>
   );
 }
-

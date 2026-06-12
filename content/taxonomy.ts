@@ -22,14 +22,9 @@ export const categories: Category[] = [
     description: "Зубные пасты и ополаскиватели без агрессивных компонентов.",
   },
   {
-    slug: "supplements",
-    title: "БАДы",
-    description: "Нутрицевтические комплексы, спирулина, пробиотики и тоники.",
-  },
-  {
-    slug: "vitamins",
-    title: "Витамины",
-    description: "Витаминные комплексы Арнебия для поддержки здоровья и красоты.",
+    slug: "vitamins-and-supplements",
+    title: "Витамины и БАДы",
+    description: "Витаминные комплексы, нутрицевтики, пробиотики, спирулина и натуральные тоники для ежедневной поддержки.",
   },
   {
     slug: "essential-oils",
@@ -85,6 +80,20 @@ export const categories: Category[] = [
 
 export const brands: Brand[] = [
   {
+    slug: "arnebia-books",
+    title: "Издательство Арнебия",
+    latin: "Arnebia Books",
+    short: "Книги и профессиональные издания по натуропатии, питанию, рефлексотерапии, фитотерапии и здоровью.",
+    description:
+      "Книжное направление Арнебии: переводные и авторские издания для специалистов и читателей, которым важен внимательный, доказательный и практичный подход к теме здоровья.",
+    origin: "Россия",
+    focus: ["Книги", "Справочники", "Рефлексотерапия", "Натуропатия"],
+    image: "/references/arnebia-general-catalog.jpg",
+    logoText: "АРНЕБИЯ",
+    logoSubtext: "books & guides",
+    accent: "#8b5a3d",
+  },
+  {
     slug: "villaphyta",
     title: "Виллафита",
     latin: "Villaphyta",
@@ -94,6 +103,8 @@ export const brands: Brand[] = [
     origin: "Франция / Россия",
     focus: ["Гидролаты", "Эфирные масла", "БАДы", "Уход за волосами"],
     image: "https://www.arnebia.ru/img/shop/4306b.jpg",
+    logoText: "VILLAPHYTA",
+    logoSubtext: "натуральный уход",
     accent: "#7f9f57",
     featured: true,
   },
@@ -107,6 +118,8 @@ export const brands: Brand[] = [
     origin: "Россия",
     focus: ["Дерматокосметика", "Уход за лицом", "Уход за руками", "Уход за стопами"],
     image: "https://www.arnebia.ru/img/shop/4333b.jpg",
+    logoText: "АРНЕБИЯ SELECTION",
+    logoSubtext: "derma care",
     accent: "#8f795d",
     featured: true,
   },
@@ -120,6 +133,8 @@ export const brands: Brand[] = [
     origin: "Германия",
     focus: ["Витамины", "Минералы", "Ежедневная поддержка"],
     image: "https://www.arnebia.ru/img/shop/1317f.jpg",
+    logoText: "АРНЕБИЯ",
+    logoSubtext: "витамины и минералы",
     accent: "#9a7f3f",
     featured: true,
   },
@@ -133,6 +148,8 @@ export const brands: Brand[] = [
     origin: "Россия",
     focus: ["Ополаскиватели", "Зубные пасты", "Минералы", "Спирулина"],
     image: "https://www.arnebia.ru/img/shop/4413b.jpg",
+    logoText: "АТЛАНТОМАРИН",
+    logoSubtext: "oral care",
     accent: "#4c8a90",
     featured: true,
   },
@@ -146,6 +163,8 @@ export const brands: Brand[] = [
     origin: "Германия",
     focus: ["Макияж", "Аксессуары", "Минеральные текстуры"],
     image: "https://www.arnebia.ru/img/shop/2225b.jpg",
+    logoText: "benecos",
+    logoSubtext: "natural beauty",
     accent: "#b26f7e",
   },
   {
@@ -158,6 +177,8 @@ export const brands: Brand[] = [
     origin: "Германия",
     focus: ["Аромакосметика", "Эфирные масла", "SPA"],
     image: "https://www.arnebia.ru/img/shop/2359b.jpg",
+    logoText: "PRIMAVERA",
+    logoSubtext: "pure nature",
     accent: "#9c8d49",
   },
   {
@@ -170,6 +191,8 @@ export const brands: Brand[] = [
     origin: "Италия",
     focus: ["Краски для волос", "Уход после окрашивания"],
     image: "https://www.arnebia.ru/img/shop/3620b.jpg",
+    logoText: "HERBATINT",
+    logoSubtext: "color care",
     accent: "#6f7c45",
   },
   {
@@ -182,6 +205,8 @@ export const brands: Brand[] = [
     origin: "Германия",
     focus: ["Спирулина", "Нутрицевтики", "БАДы"],
     image: "https://www.arnebia.ru/img/shop/3060b.jpg",
+    logoText: "SANATUR",
+    logoSubtext: "spirulina & phyto",
     accent: "#527b52",
   },
   {
@@ -194,6 +219,8 @@ export const brands: Brand[] = [
     origin: "Италия",
     focus: ["Фитобальзамы", "Эфирные масла", "Холистический уход"],
     image: "https://www.arnebia.ru/img/shop/3595b.jpg",
+    logoText: "ERBORISTERIA MAGENTINA",
+    logoSubtext: "erbe e natura",
     accent: "#768550",
   },
   {
@@ -206,6 +233,8 @@ export const brands: Brand[] = [
     origin: "Франция",
     focus: ["Натуральная косметика", "Ароматерапия"],
     image: "https://www.arnebia.ru/img/shop/3645b.jpg",
+    logoText: "FLORAME",
+    logoSubtext: "aromathérapie",
     accent: "#6d915f",
   },
   {
@@ -218,6 +247,8 @@ export const brands: Brand[] = [
     origin: "Германия",
     focus: ["Аксессуары", "Массаж", "Уход за телом"],
     image: "https://www.arnebia.ru/img/shop/1612b.jpg",
+    logoText: "FÖRSTER'S",
+    logoSubtext: "natural brushes",
     accent: "#a9854c",
   },
 ];

@@ -1,60 +1,56 @@
-import { parseFrontmatter } from "@/lib/frontmatter";
+import { readProducts, readPosts } from "@/lib/admin-config";
+import { staticPosts, staticProducts } from "@/lib/static-content";
 import type { Post, Product } from "@/types/content";
 
-const productModules = import.meta.glob("../content/products/*.mdx", {
-  eager: true,
-  query: "?raw",
-  import: "default",
-});
+export const products = staticProducts;
+export const posts = staticPosts;
 
-const postModules = import.meta.glob("../content/posts/*.mdx", {
-  eager: true,
-  query: "?raw",
-  import: "default",
-});
-
-function parseCollection<T extends Record<string, unknown>>(
-  modules: Record<string, unknown>,
-) {
-  return Object.values(modules).map((source) => {
-    if (typeof source !== "string") {
-      throw new Error("Expected raw MDX content as a string.");
-    }
-
-    return parseFrontmatter<T>(source);
-  });
+function sortProducts(items: Product[]) {
+  return [...items].sort((a, b) => a.title.localeCompare(b.title, "ru"));
 }
 
-export const products = parseCollection<Product>(productModules).sort((a, b) =>
-  a.title.localeCompare(b.title, "ru"),
-);
-
-export const posts = parseCollection<Post>(postModules).sort((a, b) =>
-  b.date.localeCompare(a.date),
-);
-
-export function getProduct(slug: string) {
-  return products.find((product) => product.slug === slug);
+function sortPosts(items: Post[]) {
+  return [...items].sort((a, b) => b.date.localeCompare(a.date));
 }
 
-export function getPost(slug: string) {
-  return posts.find((post) => post.slug === slug);
+export async function getProducts() {
+  return sortProducts(await readProducts());
 }
 
-export function getProductsByBrand(brand: string) {
-  return products.filter((product) => product.brand === brand);
+export async function getPosts() {
+  return sortPosts(await readPosts());
 }
 
-export function getProductsByCategory(category: string) {
-  return products.filter((product) => product.categories.includes(category));
+export async function getProduct(slug: string) {
+  const runtimeProducts = await getProducts();
+
+  return runtimeProducts.find((product) => product.slug === slug);
 }
 
-export function searchProducts(query: string) {
+export async function getPost(slug: string) {
+  const runtimePosts = await getPosts();
+
+  return runtimePosts.find((post) => post.slug === slug);
+}
+
+export async function getProductsByBrand(brand: string) {
+  const runtimeProducts = await getProducts();
+
+  return runtimeProducts.filter((product) => product.brand === brand);
+}
+
+export async function getProductsByCategory(category: string) {
+  const runtimeProducts = await getProducts();
+
+  return runtimeProducts.filter((product) => product.categories.includes(category));
+}
+
+export function searchProductsIn(items: Product[], query: string) {
   const normalized = query.trim().toLocaleLowerCase("ru");
 
-  if (!normalized) return products;
+  if (!normalized) return items;
 
-  return products.filter((product) =>
+  return items.filter((product) =>
     [
       product.title,
       product.description,
@@ -67,5 +63,9 @@ export function searchProducts(query: string) {
       .toLocaleLowerCase("ru")
       .includes(normalized),
   );
+}
+
+export async function searchProducts(query: string) {
+  return searchProductsIn(await getProducts(), query);
 }
 

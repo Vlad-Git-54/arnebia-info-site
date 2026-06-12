@@ -1,44 +1,55 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/json-ld";
 import { ProductCard } from "@/components/product-card";
 import { SectionHeading } from "@/components/section-heading";
-import { brands, getBrand } from "@/content/taxonomy";
+import { brands as staticBrands } from "@/content/taxonomy";
+import { readBrands, readSeoSettings } from "@/lib/admin-config";
 import { getProductsByBrand } from "@/lib/content";
-import { breadcrumbJsonLd } from "@/lib/seo";
+import { applySeoTemplate, breadcrumbJsonLd } from "@/lib/seo";
 
 type Params = Promise<{ slug: string }>;
 
+export const dynamic = "force-dynamic";
+
 export function generateStaticParams() {
-  return brands.map((brand) => ({ slug: brand.slug }));
+  return staticBrands.map((brand) => ({ slug: brand.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug } = await params;
-  const brand = getBrand(slug);
+  const brands = await readBrands();
+  const brand = brands.find((item) => item.slug === slug);
 
   if (!brand) return {};
 
-  return {
+  const seo = await readSeoSettings();
+  const title = applySeoTemplate(seo.brandTitleTemplate, {
+    brand: brand.title,
+    category: "",
     title: brand.title,
+  });
+
+  return {
+    title,
     description: brand.description,
     openGraph: {
-      title: `${brand.title} — Арнебия`,
+      title,
       description: brand.description,
-      images: [{ url: brand.image, alt: `Продукция бренда ${brand.title}` }],
+      images: [{ url: brand.image, alt: brand.title }],
     },
   };
 }
 
 export default async function BrandPage({ params }: { params: Params }) {
   const { slug } = await params;
-  const brand = getBrand(slug);
+  const brands = await readBrands();
+  const brand = brands.find((item) => item.slug === slug);
 
   if (!brand) notFound();
 
-  const brandProducts = getProductsByBrand(brand.slug);
+  const brandProducts = await getProductsByBrand(brand.slug);
 
   return (
     <main>
@@ -79,16 +90,26 @@ export default async function BrandPage({ params }: { params: Params }) {
             </Link>
           </div>
         </div>
-        <div className="relative aspect-[4/3] overflow-hidden rounded-md border border-stone-200 bg-white shadow-sm">
-          <Image
-            alt={`Продукция бренда ${brand.title}`}
-            className="object-contain p-10"
-            fill
-            priority
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            src={brand.image}
-            unoptimized
-          />
+
+        <div className="grid overflow-hidden rounded-md border border-stone-200 bg-linen-100 shadow-sm">
+          <div className="relative grid min-h-[360px] place-items-center px-8 py-12">
+            <span
+              aria-hidden
+              className="absolute inset-x-10 top-0 h-1 rounded-b-md"
+              style={{ backgroundColor: brand.accent }}
+            />
+            <div className="grid w-full max-w-lg place-items-center rounded-md border border-white/80 bg-white/84 px-8 py-12 text-center shadow-sm">
+              <p
+                className="break-words text-balance text-3xl font-semibold leading-tight tracking-normal [overflow-wrap:anywhere] md:text-5xl"
+                style={{ color: brand.accent }}
+              >
+                {brand.logoText ?? brand.latin ?? brand.title}
+              </p>
+              <p className="mt-3 text-sm font-semibold uppercase tracking-[0.18em] text-stone-500">
+                {brand.logoSubtext ?? brand.origin}
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -113,7 +134,7 @@ export default async function BrandPage({ params }: { params: Params }) {
         <SectionHeading
           description={
             brandProducts.length
-              ? "Фото, назначение, ключевые ингредиенты и быстрый переход к карточкам товаров."
+              ? "Фото, назначение, ключевые ингредиенты и переход к карточкам товаров."
               : "Ассортимент бренда обновляется."
           }
           eyebrow="Продукты"
@@ -122,7 +143,7 @@ export default async function BrandPage({ params }: { params: Params }) {
         {brandProducts.length ? (
           <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {brandProducts.map((product) => (
-              <ProductCard product={product} key={product.slug} />
+              <ProductCard brandTitle={brand.title} product={product} key={product.slug} />
             ))}
           </div>
         ) : (

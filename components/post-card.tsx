@@ -7,7 +7,6 @@ const labels = {
   article: "Статья",
   news: "Новость",
   promo: "Акция",
-  seminar: "Семинар",
 };
 
 export function PostCard({ post }: { post: Post }) {
@@ -16,10 +15,11 @@ export function PostCard({ post }: { post: Post }) {
       <Link className="relative block aspect-[16/10] bg-linen-100" href={`/news/${post.slug}`}>
         <Image
           alt={post.imageAlt}
-          className="object-contain p-7"
+          className="h-full w-full object-contain"
           fill
           sizes="(max-width: 768px) 100vw, 33vw"
           src={post.image}
+          style={{ objectFit: "contain" }}
           unoptimized
         />
       </Link>
@@ -37,4 +37,3 @@ export function PostCard({ post }: { post: Post }) {
     </article>
   );
 }
-

@@ -7,11 +7,13 @@ import { MarketplaceLinks } from "@/components/marketplace-links";
 import { ProductCard } from "@/components/product-card";
 import { RichText } from "@/components/rich-text";
 import { SectionHeading } from "@/components/section-heading";
-import { categories, getBrand } from "@/content/taxonomy";
-import { getProduct, products } from "@/lib/content";
-import { breadcrumbJsonLd, productJsonLd } from "@/lib/seo";
+import { readBrands, readCategories, readSeoSettings } from "@/lib/admin-config";
+import { getProduct, getProducts, products } from "@/lib/content";
+import { applySeoTemplate, breadcrumbJsonLd, productJsonLd } from "@/lib/seo";
 
 type Params = Promise<{ slug: string }>;
+
+export const dynamic = "force-dynamic";
 
 export function generateStaticParams() {
   return products.map((product) => ({ slug: product.slug }));
@@ -19,17 +21,39 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProduct(slug);
+  const product = await getProduct(slug);
 
   if (!product) return {};
 
+  const [seo, brands, categories] = await Promise.all([
+    readSeoSettings(),
+    readBrands(),
+    readCategories(),
+  ]);
+  const brandTitle = brands.find((item) => item.slug === product.brand)?.title ?? product.brand;
+  const categoryTitle =
+    product.categories
+      .map((categorySlug) => categories.find((item) => item.slug === categorySlug)?.title)
+      .find(Boolean) ?? "";
+  const templateValues = {
+    brand: brandTitle,
+    category: categoryTitle,
+    title: product.title,
+  };
+  const title = product.seoTitle || applySeoTemplate(seo.productTitleTemplate, templateValues);
+  const description =
+    product.seoDescription ||
+    (seo.productDescriptionTemplate
+      ? applySeoTemplate(seo.productDescriptionTemplate, templateValues)
+      : product.description);
+
   return {
-    title: product.seoTitle ?? product.title,
-    description: product.seoDescription ?? product.description,
+    title,
+    description,
     keywords: product.keywords,
     openGraph: {
-      title: product.title,
-      description: product.description,
+      title,
+      description,
       images: [{ url: product.image, alt: product.imageAlt }],
       type: "website",
     },
@@ -38,12 +62,15 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 
 export default async function ProductPage({ params }: { params: Params }) {
   const { slug } = await params;
-  const product = getProduct(slug);
+  const product = await getProduct(slug);
 
   if (!product) notFound();
 
-  const brand = getBrand(product.brand);
-  const related = products
+  const brands = await readBrands();
+  const categories = await readCategories();
+  const brand = brands.find((item) => item.slug === product.brand);
+  const runtimeProducts = await getProducts();
+  const related = runtimeProducts
     .filter((item) => item.slug !== product.slug && item.brand === product.brand)
     .slice(0, 3);
 
@@ -59,14 +86,15 @@ export default async function ProductPage({ params }: { params: Params }) {
       />
 
       <section className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[0.92fr_1.08fr] lg:px-8">
-        <div className="relative aspect-square overflow-hidden rounded-md border border-stone-200 bg-white shadow-sm">
+        <div className="relative aspect-square overflow-hidden rounded-md border border-stone-200 bg-gradient-to-br from-white to-linen-100 shadow-sm">
           <Image
             alt={product.imageAlt}
-            className="object-contain p-10"
+            className="h-full w-full object-contain"
             fill
             priority
             sizes="(max-width: 1024px) 100vw, 50vw"
             src={product.image}
+            style={{ objectFit: "contain" }}
             unoptimized
           />
         </div>
@@ -141,20 +169,12 @@ export default async function ProductPage({ params }: { params: Params }) {
             />
             <div className="mt-8 grid gap-5 md:grid-cols-3">
               {related.map((item) => (
-                <ProductCard product={item} key={item.slug} />
+                <ProductCard brandTitle={brand?.title} product={item} key={item.slug} />
               ))}
             </div>
           </div>
         </section>
       ) : null}
-
-      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="rounded-md border border-olive-200 bg-olive-50 p-6">
-          <p className="text-sm leading-7 text-olive-900">
-            Информация на странице носит справочный характер. Перед применением БАДов и специализированных средств ознакомьтесь с инструкцией производителя.
-          </p>
-        </div>
-      </section>
     </main>
   );
 }

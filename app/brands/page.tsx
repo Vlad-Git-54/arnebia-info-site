@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { BrandCard } from "@/components/brand-card";
 import { SectionHeading } from "@/components/section-heading";
-import { brands } from "@/content/taxonomy";
+import { readBrands } from "@/lib/admin-config";
 
 export const metadata: Metadata = {
   title: "Бренды",
@@ -9,11 +9,15 @@ export const metadata: Metadata = {
     "Бренды в портфеле Арнебии: Виллафита, Арнебия Селекшн, Атлантомарин, Бенекос, Примавера, Гербатинт, Санатур и другие.",
 };
 
-export default function BrandsPage() {
+export const dynamic = "force-dynamic";
+
+export default async function BrandsPage() {
+  const brands = await readBrands();
+
   return (
     <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <SectionHeading
-        description="Собственные линии Арнебии и европейские партнеры представлены отдельными страницами с категориями, продуктами и материалами."
+        description="Собственные линии Арнебии и европейские партнеры представлены отдельными страницами с продуктами, направлениями и материалами."
         eyebrow="Бренды"
         title="Портфель натуральной косметики, ароматерапии и нутрицевтиков"
       />
@@ -25,4 +29,3 @@ export default function BrandsPage() {
     </main>
   );
 }
-

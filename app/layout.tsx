@@ -3,38 +3,43 @@ import { Analytics } from "@/components/analytics";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { JsonLd } from "@/components/json-ld";
+import { readSeoSettings } from "@/lib/admin-config";
 import { defaultSeo, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import "./globals.css";
 
-export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://www.arnebia.ru"),
-  title: {
-    default: defaultSeo.title,
-    template: "%s | Арнебия",
-  },
-  description: defaultSeo.description,
-  keywords: [
-    "Арнебия",
-    "натуральная косметика",
-    "эфирные масла",
-    "БАДы",
-    "витамины",
-    "Виллафита",
-    "Арнебия Селекшн",
-  ],
-  openGraph: {
-    title: defaultSeo.title,
-    description: defaultSeo.description,
-    locale: "ru_RU",
-    siteName: "Арнебия",
-    type: "website",
-    url: "/",
-  },
-  icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await readSeoSettings();
+
+  return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://arnebia-info.ru"),
+    title: {
+      default: seo.siteTitle || defaultSeo.title,
+      template: "%s | Арнебия",
+    },
+    description: seo.siteDescription || defaultSeo.description,
+    keywords: seo.siteKeywords,
+    openGraph: {
+      title: seo.ogTitle || seo.siteTitle || defaultSeo.title,
+      description: seo.ogDescription || seo.siteDescription || defaultSeo.description,
+      images: seo.ogImage ? [{ url: seo.ogImage, alt: "Арнебия" }] : undefined,
+      locale: "ru_RU",
+      siteName: "Арнебия",
+      type: "website",
+      url: "/",
+    },
+    robots: seo.robotsIndex
+      ? undefined
+      : {
+          follow: false,
+          index: false,
+        },
+    icons: {
+      icon: "/favicon.png",
+      shortcut: "/favicon.png",
+      apple: "/favicon.png",
+    },
+  };
+}
 
 export const viewport: Viewport = {
   colorScheme: "light",

@@ -1,18 +1,22 @@
 import type { Metadata } from "next";
 import { PostCard } from "@/components/post-card";
 import { SectionHeading } from "@/components/section-heading";
-import { posts } from "@/lib/content";
+import { getPosts } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Новости и блог",
-  description: "Новости, акции, семинары и экспертные статьи Арнебии.",
+  description: "Новости, акции и экспертные статьи Арнебии о натуральном уходе, продуктах и wellness-направлениях.",
 };
 
-export default function NewsPage() {
+export const dynamic = "force-dynamic";
+
+export default async function NewsPage() {
+  const posts = await getPosts();
+
   return (
     <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <SectionHeading
-        description="Материалы для покупателей, партнеров, специалистов wellness и beauty-направлений."
+        description="Материалы для покупателей, партнеров и специалистов beauty- и wellness-направлений."
         eyebrow="Новости и блог"
         title="Экспертные материалы Арнебии"
       />
@@ -24,4 +28,3 @@ export default function NewsPage() {
     </main>
   );
 }
-

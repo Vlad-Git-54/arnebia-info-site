@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SectionHeading } from "@/components/section-heading";
-import { brands, categories } from "@/content/taxonomy";
-import { posts, products } from "@/lib/content";
+import { readBrands, readCategories } from "@/lib/admin-config";
+import { getPosts, getProducts } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Карта сайта",
   description: "HTML-карта сайта Арнебии.",
 };
+
+export const dynamic = "force-dynamic";
 
 const staticLinks: Array<[string, string]> = [
   ["/", "Главная"],
@@ -15,7 +17,6 @@ const staticLinks: Array<[string, string]> = [
   ["/brands", "Бренды"],
   ["/about", "О компании"],
   ["/news", "Новости"],
-  ["/seminars", "Семинары"],
   ["/promotions", "Акции"],
   ["/certificates", "Справочники"],
   ["/contacts", "Контакты"],
@@ -42,7 +43,12 @@ function LinkGroup({
   );
 }
 
-export default function SitemapPage() {
+export default async function SitemapPage() {
+  const products = await getProducts();
+  const posts = await getPosts();
+  const brands = await readBrands();
+  const categories = await readCategories();
+
   return (
     <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <SectionHeading

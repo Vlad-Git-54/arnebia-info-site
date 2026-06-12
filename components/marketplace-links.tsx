@@ -4,6 +4,7 @@ import type { MarketplaceLinks as MarketplaceLinkType } from "@/types/content";
 const marketplaces = [
   { key: "wildberries", label: "Wildberries" },
   { key: "ozon", label: "Ozon" },
+  { key: "official", label: "Arnebia.ru" },
 ] as const;
 
 export function MarketplaceLinks({
@@ -17,11 +18,14 @@ export function MarketplaceLinks({
 
   if (!visibleLinks.length) return null;
 
+  const onlyOfficial = visibleLinks.length === 1 && visibleLinks[0]?.key === "official";
+  const heading = onlyOfficial ? "Подробнее" : "Где купить";
+
   if (compact) {
     return (
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-olive-800">
-          Где купить
+          {heading}
         </p>
         <div className="mt-3 grid gap-2">
           {visibleLinks.map(({ key, label }) => (
@@ -32,7 +36,7 @@ export function MarketplaceLinks({
               rel="noreferrer"
               target="_blank"
             >
-              <span>{label}</span>
+              <span>{key === "official" ? "Подробнее на arnebia.ru" : label}</span>
               <Icon className="h-4 w-4" name="external" />
             </a>
           ))}
@@ -44,7 +48,7 @@ export function MarketplaceLinks({
   return (
     <div className="rounded-md border border-olive-200 bg-olive-50 p-4">
       <p className="text-xs font-semibold uppercase tracking-[0.18em] text-olive-800">
-        Где купить
+        {heading}
       </p>
       <div className="mt-4 flex flex-wrap gap-3">
         {visibleLinks.map(({ key, label }) => (
@@ -55,7 +59,7 @@ export function MarketplaceLinks({
             rel="noreferrer"
             target="_blank"
           >
-            <span>{label}</span>
+            <span>{key === "official" ? "Подробнее на arnebia.ru" : label}</span>
             <Icon className="h-4 w-4" name="external" />
           </a>
         ))}

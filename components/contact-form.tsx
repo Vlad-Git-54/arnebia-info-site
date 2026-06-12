@@ -4,8 +4,8 @@ import { siteConfig } from "@/content/site";
 const topics = [
   "Отдел продаж",
   "Партнерские программы",
-  "Семинары и мероприятия",
   "Маркетплейсы",
+  "Справочники и каталоги",
   "Пресс-запрос",
 ];
 
@@ -46,4 +46,3 @@ export function ContactForm() {
     </form>
   );
 }
-

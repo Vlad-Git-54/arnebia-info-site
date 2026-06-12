@@ -42,7 +42,7 @@ NEXT_PUBLIC_SITE_URL=https://ваш-временный-домен
 app/                 страницы, sitemap.xml, robots.txt
 components/          Header, Footer, ProductCard, CatalogFilters, формы и UI
 content/products/    товары в MDX + frontmatter
-content/posts/       новости, акции, семинары и статьи в MDX + frontmatter
+content/posts/       новости, акции и статьи в MDX + frontmatter
 content/taxonomy.ts  бренды и категории
 content/site.ts      контакты, соцсети, базовые настройки
 lib/                 загрузчик контента, SEO, frontmatter parser
@@ -78,7 +78,7 @@ tags: ["Арнебия", "Новость"]
 ---
 ```
 
-Поддерживаемые категории: `news`, `seminar`, `promo`, `article`.
+Поддерживаемые категории: `news`, `promo`, `article`.
 
 ## SEO
 
@@ -103,6 +103,23 @@ NEXT_PUBLIC_GA_ID=
 ```
 
 Telegram, WhatsApp, email, телефон и адрес находятся в `content/site.ts`.
+
+## Админка
+
+Админка доступна по адресу `/admin`. Сейчас в ней есть визуальный редактор
+баннеров главной страницы: порядок, ширина на desktop, мобильный предпросмотр,
+формат изображения, текст, ссылки, видимость и загрузка новых изображений.
+
+Для production задайте переменные окружения:
+
+```bash
+ADMIN_PASSWORD=сложный-пароль-для-входа
+ADMIN_SESSION_SECRET=длинная-случайная-строка
+ADMIN_DATA_DIR=/app/data
+```
+
+На VPS данные админки хранятся в Docker volume `arnebia_data`, поэтому правки
+баннеров и загруженные изображения не пропадают при пересборке контейнера.
 
 ## Масштабирование
 

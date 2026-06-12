@@ -2,9 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { Icon } from "@/components/icons";
 import { siteConfig } from "@/content/site";
-import { brands, categories } from "@/content/taxonomy";
+import { readBrands, readCategories } from "@/lib/admin-config";
 
-export function Footer() {
+export async function Footer() {
+  const brands = await readBrands();
+  const categories = await readCategories();
+
   return (
     <footer className="border-t border-stone-200 bg-stone-950 text-white">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.2fr_1fr_1fr_1fr] lg:px-8">
@@ -34,7 +37,6 @@ export function Footer() {
               ["/catalog", "Каталог"],
               ["/about", "О компании"],
               ["/news", "Новости и блог"],
-              ["/seminars", "Семинары"],
               ["/promotions", "Акции"],
               ["/certificates", "Справочники"],
               ["/sitemap", "Карта сайта"],

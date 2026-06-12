@@ -19,7 +19,7 @@ export default function ContactsPage() {
   return (
     <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <SectionHeading
-        description="Свяжитесь с Арнебией по вопросам дистрибуции, семинаров, партнерских программ, каталогов и справочников."
+        description="Свяжитесь с Арнебией по вопросам дистрибуции, партнерских программ, каталогов и справочников."
         eyebrow="Контакты"
         title="Мы всегда на связи"
       />

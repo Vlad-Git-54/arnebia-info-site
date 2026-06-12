@@ -1,0 +1,4 @@
+arnebia-info.ru, www.arnebia-info.ru {
+	encode zstd gzip
+	reverse_proxy arnebia:3000
+}
