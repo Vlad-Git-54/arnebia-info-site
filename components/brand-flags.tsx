@@ -28,11 +28,11 @@ export function BrandFlags({ className = "", codes }: { className?: string; code
   if (!flags.length) return null;
 
   return (
-    <span className={`flex items-center gap-1 ${className}`.trim()} aria-label="Страны бренда">
+    <span className={`flex items-center gap-1 sm:gap-1.5 ${className}`.trim()} aria-label="Страны бренда">
       {flags.map((code) => (
         <span
           aria-label={flagLabels[code]}
-          className="block h-3.5 w-5 rounded-[2px] border border-stone-200 shadow-sm"
+          className="block h-3.5 w-5 rounded-[2px] border border-stone-200 shadow-sm sm:h-4 sm:w-6 lg:h-5 lg:w-[30px]"
           key={code}
           role="img"
           style={flagStyles[code]}

@@ -9,7 +9,7 @@ export function BrandCard({ brand }: { brand: Brand }) {
   return (
     <article className="grid min-w-0 overflow-hidden rounded-md border border-stone-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
       <Link
-        className="group relative grid min-h-[178px] min-w-0 max-w-full place-items-center overflow-hidden bg-linen-100 px-6 py-8"
+        className="group relative grid min-h-[190px] min-w-0 max-w-full place-items-center overflow-hidden bg-linen-100 px-4 py-7 sm:min-h-[210px] sm:px-6 sm:py-8"
         href={`/brands/${brand.slug}`}
         style={{ "--brand-accent": brand.accent } as CSSProperties}
       >
@@ -19,16 +19,16 @@ export function BrandCard({ brand }: { brand: Brand }) {
           style={{ backgroundColor: brand.accent }}
         />
         <span className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.92),transparent_44%)]" />
-        <span className="relative grid min-h-[118px] w-full min-w-0 max-w-full place-items-center overflow-hidden rounded-md border border-white/80 bg-white px-5 py-6 text-center shadow-sm transition duration-300 group-hover:scale-[1.02]">
-          <BrandFlags className="absolute right-3 top-3 z-10" codes={brand.flagCodes} />
+        <span className="relative grid min-h-[128px] w-full min-w-0 max-w-full place-items-center overflow-hidden rounded-md border border-white/80 bg-white px-5 py-6 text-center shadow-sm transition duration-300 group-hover:scale-[1.02] sm:min-h-[146px]">
+          <BrandFlags className="absolute right-3 top-3 z-10 sm:right-4 sm:top-4" codes={brand.flagCodes} />
           {brand.logoImage ? (
             <Image
               alt={`${brand.title} logo`}
-              className="h-auto max-h-[112px] max-w-full object-contain"
-              height={140}
+              className="h-auto max-h-[118px] max-w-full object-contain sm:max-h-[136px]"
+              height={160}
               src={brand.logoImage}
               unoptimized
-              width={300}
+              width={360}
             />
           ) : (
             <>
