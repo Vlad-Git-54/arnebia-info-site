@@ -36,7 +36,7 @@ export function CatalogFilters({
             placeholder="Поиск по продуктам"
             type="search"
           />
-          <button className="grid w-11 place-items-center bg-olive-900 text-white" type="submit">
+          <button className="grid w-11 place-items-center bg-olive-700 text-white transition hover:bg-olive-800" type="submit">
             <Icon className="h-4 w-4" name="search" />
             <span className="sr-only">Найти</span>
           </button>

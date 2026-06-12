@@ -179,7 +179,7 @@ export function MarketplaceLinks({
       <div className="mt-4 flex flex-wrap gap-3">
         {visibleLinks.map(({ key, label }) => (
           <a
-            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-stone-950 px-4 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-olive-800 focus:outline-none focus:ring-2 focus:ring-olive-500 focus:ring-offset-2"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-olive-700 px-4 py-2 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-olive-800 focus:outline-none focus:ring-2 focus:ring-olive-500 focus:ring-offset-2"
             href={links[key]}
             key={key}
             rel="noreferrer"

@@ -249,7 +249,7 @@ function makeBrand(): Brand {
     logoText: "NEW BRAND",
     logoSubtext: "natural care",
     flagCodes: ["ru"],
-    accent: "#7f9f57",
+    accent: "#178744",
     featured: false,
   };
 }
@@ -891,7 +891,7 @@ export function AdminDashboard({
 
   if (!authenticated) {
     return (
-      <main className="fixed inset-0 z-[100] grid place-items-center overflow-auto bg-[#f5f1e7] px-4 py-10">
+      <main className="fixed inset-0 z-[100] grid place-items-center overflow-auto bg-linen-50 px-4 py-10">
         <div className="w-full max-w-md rounded-md border border-stone-200 bg-white p-6 shadow-2xl">
           <Image
             alt="Арнебия"
@@ -944,9 +944,9 @@ export function AdminDashboard({
   }
 
   return (
-    <main className="fixed inset-0 z-[100] overflow-auto bg-[#f6f3eb] text-stone-950">
+    <main className="fixed inset-0 z-[100] overflow-auto bg-linen-50 text-stone-950">
       <div className="grid min-h-screen lg:grid-cols-[280px_1fr]">
-        <aside className="border-r border-stone-200 bg-stone-950 px-4 py-5 text-white">
+        <aside className="border-r border-olive-900/20 bg-olive-950 px-4 py-5 text-olive-50">
           <Link className="inline-flex rounded-md bg-white px-3 py-2" href="/">
             <Image alt="Арнебия" height={85} src="/brand/arnebia-logo.svg" unoptimized width={210} />
           </Link>
@@ -964,7 +964,7 @@ export function AdminDashboard({
               <button
                 className={cn(
                   "rounded-md px-3 py-3 text-left text-sm font-semibold transition",
-                  activeTab === id ? "bg-white text-stone-950" : "text-stone-200 hover:bg-white/10",
+                  activeTab === id ? "bg-white text-stone-950" : "text-olive-50/80 hover:bg-white/10",
                 )}
                 key={id}
                 onClick={() => setActiveTab(id as AdminTab)}
@@ -974,7 +974,7 @@ export function AdminDashboard({
               </button>
             ))}
           </nav>
-          <div className="mt-8 grid gap-2 rounded-md border border-white/10 bg-white/5 p-3 text-sm text-stone-200">
+          <div className="mt-8 grid gap-2 rounded-md border border-white/10 bg-white/10 p-3 text-sm text-olive-50/80">
             <p>Товаров: {currentSummary.products}</p>
             <p>Брендов: {currentSummary.brands}</p>
             <p>Новостей: {currentSummary.posts}</p>
@@ -1034,7 +1034,7 @@ export function AdminDashboard({
                       <button
                         className={cn(
                           "rounded px-4 py-2 text-sm font-semibold transition",
-                          previewMode === mode ? "bg-stone-950 text-white" : "text-stone-650 hover:bg-linen-100",
+                          previewMode === mode ? "bg-olive-700 text-white" : "text-stone-650 hover:bg-linen-100",
                         )}
                         key={mode}
                         onClick={() => setPreviewMode(mode)}
@@ -1125,7 +1125,7 @@ export function AdminDashboard({
                             }}
                             unoptimized
                           />
-                          <div className="absolute left-2 top-2 inline-flex items-center gap-2 rounded-md bg-stone-950/82 px-2 py-1 text-xs font-semibold text-white">
+                          <div className="absolute left-2 top-2 inline-flex items-center gap-2 rounded-md bg-olive-950/82 px-2 py-1 text-xs font-semibold text-white">
                             <span>{banner.width}/12</span>
                           </div>
                           {previewMode === "desktop" ? (

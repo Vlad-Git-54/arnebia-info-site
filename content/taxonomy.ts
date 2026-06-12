@@ -93,7 +93,7 @@ export const brands: Brand[] = [
     flagCodes: ["ru"],
     logoText: "АРНЕБИЯ",
     logoSubtext: "books & guides",
-    accent: "#8b5a3d",
+    accent: "#a8673f",
   },
   {
     slug: "villaphyta",
@@ -109,7 +109,7 @@ export const brands: Brand[] = [
     flagCodes: ["ru"],
     logoText: "VILLAPHYTA",
     logoSubtext: "натуральный уход",
-    accent: "#7f9f57",
+    accent: "#178744",
     featured: true,
   },
   {
@@ -126,7 +126,7 @@ export const brands: Brand[] = [
     flagCodes: ["ru", "de"],
     logoText: "АРНЕБИЯ SELECTION",
     logoSubtext: "derma care",
-    accent: "#8f795d",
+    accent: "#7b6b56",
     featured: true,
   },
   {
@@ -143,7 +143,7 @@ export const brands: Brand[] = [
     flagCodes: ["de"],
     logoText: "АРНЕБИЯ",
     logoSubtext: "витамины и минералы",
-    accent: "#9a7f3f",
+    accent: "#9a7b35",
     featured: true,
   },
   {
@@ -160,7 +160,7 @@ export const brands: Brand[] = [
     flagCodes: ["ru"],
     logoText: "АТЛАНТОМАРИН",
     logoSubtext: "oral care",
-    accent: "#4c8a90",
+    accent: "#4f9a99",
     featured: true,
   },
   {
@@ -177,7 +177,7 @@ export const brands: Brand[] = [
     flagCodes: ["de"],
     logoText: "benecos",
     logoSubtext: "natural beauty",
-    accent: "#b26f7e",
+    accent: "#b06b7c",
   },
   {
     slug: "primavera",
@@ -193,7 +193,7 @@ export const brands: Brand[] = [
     flagCodes: ["de"],
     logoText: "PRIMAVERA",
     logoSubtext: "pure nature",
-    accent: "#9c8d49",
+    accent: "#8f8643",
   },
   {
     slug: "herbatint",
@@ -209,7 +209,7 @@ export const brands: Brand[] = [
     flagCodes: ["it"],
     logoText: "HERBATINT",
     logoSubtext: "color care",
-    accent: "#6f7c45",
+    accent: "#48734a",
   },
   {
     slug: "sanatur",
@@ -225,7 +225,7 @@ export const brands: Brand[] = [
     flagCodes: ["de"],
     logoText: "SANATUR",
     logoSubtext: "spirulina & phyto",
-    accent: "#527b52",
+    accent: "#178744",
   },
   {
     slug: "erboristeria",
@@ -241,7 +241,7 @@ export const brands: Brand[] = [
     flagCodes: ["it"],
     logoText: "ERBORISTERIA MAGENTINA",
     logoSubtext: "erbe e natura",
-    accent: "#768550",
+    accent: "#6f804a",
   },
   {
     slug: "florame",
@@ -257,7 +257,7 @@ export const brands: Brand[] = [
     flagCodes: ["fr"],
     logoText: "FLORAME",
     logoSubtext: "aromathérapie",
-    accent: "#6d915f",
+    accent: "#4f9a73",
   },
   {
     slug: "foersters",
@@ -273,7 +273,7 @@ export const brands: Brand[] = [
     flagCodes: ["de"],
     logoText: "FÖRSTER'S",
     logoSubtext: "natural brushes",
-    accent: "#a9854c",
+    accent: "#a36c3b",
   },
 ];
 

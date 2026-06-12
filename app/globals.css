@@ -1,28 +1,38 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fbfaf5;
-  --foreground: #1d1a16;
+  --background: #fcfaf4;
+  --foreground: #242019;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-linen-50: #fbfaf5;
-  --color-linen-100: #f2ecdf;
-  --color-linen-200: #e4dac7;
-  --color-olive-50: #eef4e6;
-  --color-olive-100: #dce8cc;
-  --color-olive-200: #c7d8aa;
-  --color-olive-500: #a5bd78;
-  --color-olive-600: #7f9f57;
-  --color-olive-700: #5f7d42;
-  --color-olive-800: #456033;
-  --color-olive-900: #2c4326;
-  --color-clay-500: #c18a65;
-  --color-clay-700: #8b5a3d;
-  --color-sea-500: #5f9ca1;
-  --color-stone-650: #666058;
+  --color-linen-50: #fcfaf4;
+  --color-linen-100: #f7f0e5;
+  --color-linen-200: #eadfcf;
+  --color-olive-50: #eef8ef;
+  --color-olive-100: #dcefdc;
+  --color-olive-200: #bddfbe;
+  --color-olive-500: #6fbf77;
+  --color-olive-600: #178744;
+  --color-olive-700: #14783d;
+  --color-olive-800: #126b36;
+  --color-olive-900: #174d31;
+  --color-olive-950: #123924;
+  --color-clay-500: #bd7a50;
+  --color-clay-700: #a8673f;
+  --color-sea-500: #4f9a99;
+  --color-stone-50: #fcfaf4;
+  --color-stone-100: #f5f0e7;
+  --color-stone-200: #e6dccd;
+  --color-stone-300: #d6cbb9;
+  --color-stone-400: #9b9185;
+  --color-stone-500: #7b7166;
+  --color-stone-650: #6b6256;
+  --color-stone-700: #544c43;
+  --color-stone-900: #312d26;
+  --color-stone-950: #242019;
   --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
@@ -37,7 +47,7 @@ html {
 body {
   min-height: 100vh;
   background:
-    linear-gradient(180deg, rgba(242, 236, 223, 0.9), rgba(251, 250, 245, 0) 420px),
+    linear-gradient(180deg, rgba(247, 240, 229, 0.95), rgba(252, 250, 244, 0) 420px),
     var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
@@ -49,13 +59,13 @@ img {
 }
 
 ::selection {
-  background: #c7d8aa;
-  color: #1d1a16;
+  background: #bddfbe;
+  color: #242019;
 }
 
 .nav-link {
   border-radius: 6px;
-  color: #3c372f;
+  color: #3f382f;
   display: inline-flex;
   font-size: 14px;
   font-weight: 600;
@@ -65,8 +75,8 @@ img {
 }
 
 .nav-link:hover {
-  background: #f2ecdf;
-  color: #2c4326;
+  background: #f7f0e5;
+  color: #14783d;
 }
 
 .primary-link,
@@ -84,32 +94,32 @@ img {
 }
 
 .primary-link {
-  background: #2c4326;
+  background: #178744;
   color: #fff;
 }
 
 .primary-link:hover {
-  background: #456033;
+  background: #126b36;
   transform: translateY(-1px);
 }
 
 .secondary-link,
 .icon-link {
-  border: 1px solid #d8d0c2;
-  color: #2c4326;
+  border: 1px solid #d8cdbb;
+  color: #14783d;
 }
 
 .secondary-link:hover,
 .icon-link:hover {
-  border-color: #a5bd78;
-  background: #eef4e6;
+  border-color: #6fbf77;
+  background: #eef8ef;
 }
 
 .mobile-menu summary {
   align-items: center;
-  border: 1px solid #d8d0c2;
+  border: 1px solid #d8cdbb;
   border-radius: 6px;
-  color: #2c4326;
+  color: #14783d;
   cursor: pointer;
   display: grid;
   height: 42px;
@@ -131,13 +141,13 @@ img {
 }
 
 .filter-title {
-  color: #8b5a3d;
+  color: #a8673f;
 }
 
 .filter-chip {
-  border: 1px solid #ded6c8;
+  border: 1px solid #ded2c1;
   border-radius: 6px;
-  color: #4e4840;
+  color: #564d43;
   display: inline-flex;
   font-size: 13px;
   font-weight: 650;
@@ -148,13 +158,13 @@ img {
 
 .filter-chip:hover,
 .filter-chip-active {
-  background: #2c4326;
-  border-color: #2c4326;
+  background: #178744;
+  border-color: #178744;
   color: #fff;
 }
 
 .footer-title {
-  color: #a5bd78;
+  color: #cfe6c2;
 }
 
 .footer-links {
@@ -164,7 +174,7 @@ img {
 }
 
 .footer-links a {
-  color: #d6d3cc;
+  color: #d9ead3;
   font-size: 14px;
   line-height: 1.5;
   transition: color 160ms ease;
@@ -176,7 +186,7 @@ img {
 
 .footer-social {
   align-items: center;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 6px;
   display: grid;
   height: 38px;
@@ -186,7 +196,7 @@ img {
 }
 
 .footer-social:hover {
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.18);
 }
 
 .form-field {
@@ -195,7 +205,7 @@ img {
 }
 
 .form-field span {
-  color: #4e4840;
+  color: #544c43;
   font-size: 13px;
   font-weight: 700;
 }
@@ -203,10 +213,10 @@ img {
 .form-field input,
 .form-field select,
 .form-field textarea {
-  background: #fbfaf5;
-  border: 1px solid #d8d0c2;
+  background: #fcfaf4;
+  border: 1px solid #d8cdbb;
   border-radius: 6px;
-  color: #1d1a16;
+  color: #242019;
   font: inherit;
   min-height: 44px;
   outline: none;
@@ -221,8 +231,8 @@ img {
 .form-field input:focus,
 .form-field select:focus,
 .form-field textarea:focus {
-  border-color: #7f9f57;
-  box-shadow: 0 0 0 3px rgba(127, 159, 87, 0.18);
+  border-color: #178744;
+  box-shadow: 0 0 0 3px rgba(23, 135, 68, 0.16);
 }
 
 .line-clamp-3 {
@@ -253,4 +263,3 @@ img {
     transition-duration: 0.01ms !important;
   }
 }
-

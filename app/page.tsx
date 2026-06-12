@@ -334,7 +334,7 @@ export default async function Home() {
           </div>
           <div className="grid gap-3">
             {home.whyItems.map((advantage) => (
-              <div className="flex gap-3 rounded-md bg-white/8 p-4" key={advantage}>
+              <div className="flex gap-3 rounded-md bg-white/10 p-4" key={advantage}>
                 <Icon className="mt-1 h-5 w-5 shrink-0 text-olive-200" name="check" />
                 <p className="text-sm leading-7 text-olive-50">{advantage}</p>
               </div>

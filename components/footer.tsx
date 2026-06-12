@@ -9,13 +9,13 @@ export async function Footer() {
   const categories = await readCategories();
 
   return (
-    <footer className="border-t border-stone-200 bg-stone-950 text-white">
+    <footer className="border-t border-olive-900/20 bg-olive-950 text-olive-50">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.2fr_1fr_1fr_1fr] lg:px-8">
         <div>
           <Link className="inline-flex rounded-md bg-white px-3 py-2" href="/" aria-label="Арнебия, главная">
             <Image alt="Арнебия" height={85} src="/brand/arnebia-logo.svg" unoptimized width={220} />
           </Link>
-          <p className="mt-5 max-w-sm text-sm leading-7 text-stone-300">
+          <p className="mt-5 max-w-sm text-sm leading-7 text-olive-50/80">
             Натуральная косметика, эфирные масла, БАДы и витамины для осознанного ухода за собой и своей семьей.
           </p>
           <div className="mt-5 flex gap-2">
@@ -70,7 +70,7 @@ export async function Footer() {
           </div>
         </div>
       </div>
-      <div className="border-t border-white/10 px-4 py-5 text-center text-xs text-stone-400">
+      <div className="border-t border-white/10 px-4 py-5 text-center text-xs text-olive-50/60">
         © 2026 ООО «Арнебия». Алгоритмы красоты и здоровья.
       </div>
     </footer>

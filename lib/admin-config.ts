@@ -534,7 +534,7 @@ function normalizeBrand(value: unknown, index: number, fallback?: Brand): Brand 
     logoText: text(source.logoText, fallback?.logoText ?? title, 160) || undefined,
     logoSubtext: text(source.logoSubtext, fallback?.logoSubtext ?? "", 120) || undefined,
     flagCodes: textArray(source.flagCodes, fallback?.flagCodes ?? [], 8, 8),
-    accent: text(source.accent, fallback?.accent ?? "#7f9f57", 32) || "#7f9f57",
+    accent: text(source.accent, fallback?.accent ?? "#178744", 32) || "#178744",
     featured: typeof source.featured === "boolean" ? source.featured : fallback?.featured ?? false,
   };
 }
