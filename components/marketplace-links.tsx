@@ -1,4 +1,3 @@
-import { Icon } from "@/components/icons";
 import type { MarketplaceLinks as MarketplaceLinkType } from "@/types/content";
 
 const marketplaces = [
@@ -6,6 +5,49 @@ const marketplaces = [
   { key: "ozon", label: "Ozon" },
   { key: "official", label: "Arnebia.ru" },
 ] as const;
+
+type MarketplaceKey = (typeof marketplaces)[number]["key"];
+
+function MarketplaceLogo({
+  compact,
+  type,
+}: {
+  compact: boolean;
+  type: MarketplaceKey;
+}) {
+  const sizeClass = compact ? "h-6 min-w-8 text-[10px]" : "h-7 min-w-10 text-xs";
+
+  if (type === "wildberries") {
+    return (
+      <span
+        aria-hidden="true"
+        className={`${sizeClass} inline-flex shrink-0 items-center justify-center rounded bg-gradient-to-br from-[#d91690] via-[#9b2bd6] to-[#5b2eea] px-2 font-black tracking-normal text-white shadow-sm`}
+      >
+        WB
+      </span>
+    );
+  }
+
+  if (type === "ozon") {
+    return (
+      <span
+        aria-hidden="true"
+        className={`${sizeClass} inline-flex shrink-0 items-center justify-center rounded bg-[#005bff] px-2 font-black tracking-normal text-white shadow-sm`}
+      >
+        OZON
+      </span>
+    );
+  }
+
+  return (
+    <span
+      aria-hidden="true"
+      className={`${sizeClass} inline-flex shrink-0 items-center justify-center rounded bg-olive-700 px-2 font-black tracking-normal text-white shadow-sm`}
+    >
+      AR
+    </span>
+  );
+}
 
 export function MarketplaceLinks({
   links,
@@ -36,8 +78,8 @@ export function MarketplaceLinks({
               rel="noreferrer"
               target="_blank"
             >
+              <MarketplaceLogo compact={compact} type={key} />
               <span>{key === "official" ? "Подробнее на arnebia.ru" : label}</span>
-              <Icon className="h-4 w-4" name="external" />
             </a>
           ))}
         </div>
@@ -59,8 +101,8 @@ export function MarketplaceLinks({
             rel="noreferrer"
             target="_blank"
           >
+            <MarketplaceLogo compact={compact} type={key} />
             <span>{key === "official" ? "Подробнее на arnebia.ru" : label}</span>
-            <Icon className="h-4 w-4" name="external" />
           </a>
         ))}
       </div>
