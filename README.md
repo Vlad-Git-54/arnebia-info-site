@@ -56,10 +56,10 @@ lib/                 загрузчик контента, SEO, frontmatter parse
 4. Обновите ссылки:
 
 ```yaml
-marketplaces: {"wildberries":"https://www.wildberries.ru/catalog/123456789/detail.aspx","ozon":"https://www.ozon.ru/product/product-name-123456789/","apteka":"https://apteka.ru/product/product-name/"}
+marketplaces: {"wildberries":"https://www.wildberries.ru/catalog/123456789/detail.aspx","ozon":"https://www.ozon.ru/product/product-name-123456789/","apteka":"https://apteka.ru/product/product-name/","goldapple":"https://goldapple.ru/product","letu":"https://www.letu.ru/product/product-name","zdravcity":"https://zdravcity.ru/product-name.html"}
 ```
 
-Ссылки в примерах демонстрационные. Для production замените их на реальные карточки Wildberries, Ozon и apteka.ru.
+Ссылки в примерах демонстрационные. Для production замените их на реальные карточки Wildberries, Ozon, apteka.ru, Золотого Яблока, ЛЭтуаль, Здравсити и других партнёров.
 
 ## Как добавить новость
 

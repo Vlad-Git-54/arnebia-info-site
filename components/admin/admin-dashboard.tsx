@@ -195,6 +195,9 @@ function makeProduct(): Product {
       wildberries: "",
       ozon: "",
       apteka: "",
+      goldapple: "",
+      letu: "",
+      zdravcity: "",
       official: "",
     },
     seoTitle: "",
@@ -1824,6 +1827,9 @@ function SeoEditor({
       !product.marketplaces.wildberries?.trim() &&
       !product.marketplaces.ozon?.trim() &&
       !product.marketplaces.apteka?.trim() &&
+      !product.marketplaces.goldapple?.trim() &&
+      !product.marketplaces.letu?.trim() &&
+      !product.marketplaces.zdravcity?.trim() &&
       !product.marketplaces.official?.trim(),
   );
   const auditItems = [
@@ -2727,7 +2733,49 @@ function ProductsEditor({
                     />
                   </label>
                   <label className="form-field">
-                    <span>Официальная ссылка</span>
+                    <span>Золотое Яблоко</span>
+                    <input
+                      onChange={(event) =>
+                        updateProduct(selectedProduct.slug, {
+                          marketplaces: {
+                            ...selectedProduct.marketplaces,
+                            goldapple: event.target.value,
+                          },
+                        })
+                      }
+                      value={selectedProduct.marketplaces.goldapple ?? ""}
+                    />
+                  </label>
+                  <label className="form-field">
+                    <span>ЛЭтуаль</span>
+                    <input
+                      onChange={(event) =>
+                        updateProduct(selectedProduct.slug, {
+                          marketplaces: {
+                            ...selectedProduct.marketplaces,
+                            letu: event.target.value,
+                          },
+                        })
+                      }
+                      value={selectedProduct.marketplaces.letu ?? ""}
+                    />
+                  </label>
+                  <label className="form-field">
+                    <span>Здравсити</span>
+                    <input
+                      onChange={(event) =>
+                        updateProduct(selectedProduct.slug, {
+                          marketplaces: {
+                            ...selectedProduct.marketplaces,
+                            zdravcity: event.target.value,
+                          },
+                        })
+                      }
+                      value={selectedProduct.marketplaces.zdravcity ?? ""}
+                    />
+                  </label>
+                  <label className="form-field">
+                    <span>Официальная ссылка Arnebia.ru</span>
                     <input
                       onChange={(event) =>
                         updateProduct(selectedProduct.slug, {

@@ -124,6 +124,9 @@ function normalizeMarketplaceLinks(
     wildberries: text(source.wildberries, fallback.wildberries ?? "", 600) || undefined,
     ozon: text(source.ozon, fallback.ozon ?? "", 600) || undefined,
     apteka: text(source.apteka, fallback.apteka ?? "", 600) || undefined,
+    goldapple: text(source.goldapple, fallback.goldapple ?? "", 600) || undefined,
+    letu: text(source.letu, fallback.letu ?? "", 600) || undefined,
+    zdravcity: text(source.zdravcity, fallback.zdravcity ?? "", 600) || undefined,
     official: text(source.official, fallback.official ?? "", 600) || undefined,
   };
 }

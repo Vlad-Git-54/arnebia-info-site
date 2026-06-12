@@ -4,6 +4,9 @@ const marketplaces = [
   { key: "wildberries", label: "Wildberries" },
   { key: "ozon", label: "Ozon" },
   { key: "apteka", label: "apteka.ru" },
+  { key: "goldapple", label: "Золотое Яблоко" },
+  { key: "letu", label: "ЛЭтуаль" },
+  { key: "zdravcity", label: "Здравсити" },
   { key: "official", label: "Arnebia.ru" },
 ] as const;
 
@@ -51,6 +54,39 @@ function MarketplaceLogo({
     );
   }
 
+  if (type === "goldapple") {
+    return (
+      <span
+        aria-hidden="true"
+        className={`${sizeClass} inline-flex shrink-0 items-center justify-center rounded bg-gradient-to-br from-[#ffcc33] to-[#f59e0b] px-2 font-black tracking-normal text-stone-950 shadow-sm`}
+      >
+        ЗЯ
+      </span>
+    );
+  }
+
+  if (type === "letu") {
+    return (
+      <span
+        aria-hidden="true"
+        className={`${sizeClass} inline-flex shrink-0 items-center justify-center rounded bg-[#111827] px-2 font-black tracking-normal text-white shadow-sm`}
+      >
+        ЛЭ
+      </span>
+    );
+  }
+
+  if (type === "zdravcity") {
+    return (
+      <span
+        aria-hidden="true"
+        className={`${sizeClass} inline-flex shrink-0 items-center justify-center rounded bg-gradient-to-br from-[#00a884] to-[#0070c9] px-2 font-black tracking-normal text-white shadow-sm`}
+      >
+        ZC
+      </span>
+    );
+  }
+
   return (
     <span
       aria-hidden="true"
@@ -68,10 +104,6 @@ function getOfficialLabel(url: string | undefined) {
     const host = new URL(url).hostname.replace(/^www\./, "");
 
     if (host === "arnebia.ru") return "Arnebia.ru";
-    if (host === "goldapple.ru") return "Золотое Яблоко";
-    if (host === "letu.ru") return "ЛЭтуаль";
-    if (host === "zdravcity.ru") return "Здравсити";
-
     return host;
   } catch {
     return "Подробнее";
