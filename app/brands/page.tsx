@@ -15,7 +15,7 @@ export default async function BrandsPage() {
   const brands = await readBrands();
 
   return (
-    <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <main className="mx-auto max-w-7xl overflow-x-hidden px-4 py-12 sm:px-6 lg:px-8">
       <SectionHeading
         description="Собственные линии Арнебии и европейские партнеры представлены отдельными страницами с продуктами, направлениями и материалами."
         eyebrow="Бренды"

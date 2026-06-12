@@ -530,8 +530,10 @@ function normalizeBrand(value: unknown, index: number, fallback?: Brand): Brand 
     origin: text(source.origin, fallback?.origin ?? "", 140),
     focus: textArray(source.focus, fallback?.focus ?? [], 20, 80),
     image: text(source.image, fallback?.image ?? "/banners/catalog-products-modern.png", 600),
+    logoImage: text(source.logoImage, fallback?.logoImage ?? "", 600) || undefined,
     logoText: text(source.logoText, fallback?.logoText ?? title, 160) || undefined,
     logoSubtext: text(source.logoSubtext, fallback?.logoSubtext ?? "", 120) || undefined,
+    flagCodes: textArray(source.flagCodes, fallback?.flagCodes ?? [], 8, 8),
     accent: text(source.accent, fallback?.accent ?? "#7f9f57", 32) || "#7f9f57",
     featured: typeof source.featured === "boolean" ? source.featured : fallback?.featured ?? false,
   };

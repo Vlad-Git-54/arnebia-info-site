@@ -245,8 +245,10 @@ function makeBrand(): Brand {
     origin: "Россия",
     focus: [],
     image: "/banners/catalog-products-modern.png",
+    logoImage: "",
     logoText: "NEW BRAND",
     logoSubtext: "natural care",
+    flagCodes: ["ru"],
     accent: "#7f9f57",
     featured: false,
   };
@@ -2262,7 +2264,22 @@ function BrandsEditor({
                     value={toCsv(selectedBrand.focus)}
                   />
                 </label>
-                <div className="grid gap-4 sm:grid-cols-3">
+                <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                  <label className="form-field">
+                    <span>URL логотипа бренда</span>
+                    <input
+                      onChange={(event) => updateBrand(selectedBrand.slug, { logoImage: event.target.value })}
+                      value={selectedBrand.logoImage ?? ""}
+                    />
+                  </label>
+                  <label className="form-field">
+                    <span>Коды флагов</span>
+                    <input
+                      onChange={(event) => updateBrand(selectedBrand.slug, { flagCodes: fromCsv(event.target.value) })}
+                      placeholder="ru, de, it, fr"
+                      value={toCsv(selectedBrand.flagCodes ?? [])}
+                    />
+                  </label>
                   <label className="form-field">
                     <span>Текст логотипа</span>
                     <input
@@ -2298,16 +2315,43 @@ function BrandsEditor({
 
               <aside className="grid content-start gap-4">
                 <div className="grid min-h-[250px] place-items-center overflow-hidden rounded-md border border-stone-200 bg-linen-50 p-5 text-center">
-                  <p
-                    className="break-words text-3xl font-semibold leading-tight"
-                    style={{ color: selectedBrand.accent }}
-                  >
-                    {selectedBrand.logoText ?? selectedBrand.latin ?? selectedBrand.title}
-                  </p>
-                  <p className="mt-3 text-xs font-bold uppercase tracking-[0.16em] text-stone-500">
-                    {selectedBrand.logoSubtext ?? selectedBrand.origin}
-                  </p>
+                  {selectedBrand.logoImage ? (
+                    <Image
+                      alt={`${selectedBrand.title} logo`}
+                      className="max-h-[150px] w-full max-w-[280px] object-contain"
+                      height={150}
+                      src={selectedBrand.logoImage}
+                      unoptimized
+                      width={280}
+                    />
+                  ) : (
+                    <div>
+                      <p
+                        className="break-words text-3xl font-semibold leading-tight"
+                        style={{ color: selectedBrand.accent }}
+                      >
+                        {selectedBrand.logoText ?? selectedBrand.latin ?? selectedBrand.title}
+                      </p>
+                      <p className="mt-3 text-xs font-bold uppercase tracking-[0.16em] text-stone-500">
+                        {selectedBrand.logoSubtext ?? selectedBrand.origin}
+                      </p>
+                    </div>
+                  )}
                 </div>
+                <label className="form-field">
+                  <span>Загрузить логотип</span>
+                  <input
+                    accept="image/jpeg,image/png,image/webp,image/gif"
+                    onChange={(event) => {
+                      const file = event.target.files?.[0];
+                      if (!file) return;
+                      void uploadAsset(file).then((url) => {
+                        if (url) updateBrand(selectedBrand.slug, { logoImage: url });
+                      });
+                    }}
+                    type="file"
+                  />
+                </label>
                 <div className="relative aspect-[4/3] overflow-hidden rounded-md border border-stone-200 bg-linen-50">
                   <Image
                     alt={selectedBrand.title}

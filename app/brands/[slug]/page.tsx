@@ -1,6 +1,8 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { BrandFlags } from "@/components/brand-flags";
 import { JsonLd } from "@/components/json-ld";
 import { ProductCard } from "@/components/product-card";
 import { SectionHeading } from "@/components/section-heading";
@@ -98,16 +100,30 @@ export default async function BrandPage({ params }: { params: Params }) {
               className="absolute inset-x-10 top-0 h-1 rounded-b-md"
               style={{ backgroundColor: brand.accent }}
             />
-            <div className="grid w-full max-w-lg place-items-center rounded-md border border-white/80 bg-white/84 px-8 py-12 text-center shadow-sm">
-              <p
-                className="break-words text-balance text-3xl font-semibold leading-tight tracking-normal [overflow-wrap:anywhere] md:text-5xl"
-                style={{ color: brand.accent }}
-              >
-                {brand.logoText ?? brand.latin ?? brand.title}
-              </p>
-              <p className="mt-3 text-sm font-semibold uppercase tracking-[0.18em] text-stone-500">
-                {brand.logoSubtext ?? brand.origin}
-              </p>
+            <div className="relative grid w-full max-w-lg place-items-center rounded-md border border-white/80 bg-white px-8 py-12 text-center shadow-sm">
+              <BrandFlags className="absolute right-4 top-4" codes={brand.flagCodes} />
+              {brand.logoImage ? (
+                <Image
+                  alt={`${brand.title} logo`}
+                  className="h-auto max-h-[190px] w-full max-w-[420px] object-contain"
+                  height={180}
+                  src={brand.logoImage}
+                  unoptimized
+                  width={420}
+                />
+              ) : (
+                <>
+                  <p
+                    className="break-words text-balance text-3xl font-semibold leading-tight tracking-normal [overflow-wrap:anywhere] md:text-5xl"
+                    style={{ color: brand.accent }}
+                  >
+                    {brand.logoText ?? brand.latin ?? brand.title}
+                  </p>
+                  <p className="mt-3 text-sm font-semibold uppercase tracking-[0.18em] text-stone-500">
+                    {brand.logoSubtext ?? brand.origin}
+                  </p>
+                </>
+              )}
             </div>
           </div>
         </div>

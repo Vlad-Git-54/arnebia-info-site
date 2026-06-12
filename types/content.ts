@@ -106,8 +106,10 @@ export type Brand = {
   origin: string;
   focus: string[];
   image: string;
+  logoImage?: string;
   logoText?: string;
   logoSubtext?: string;
+  flagCodes?: string[];
   accent: string;
   featured?: boolean;
 };
